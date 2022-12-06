@@ -1,20 +1,12 @@
-import java.util.*
-
 fun main() {
 
-    data class Marker(val limit: Int, private val captured: Queue<Char> = LinkedList()) {
+    fun capture(marker: Int, input: String) = input
+        .windowedSequence(marker)
+        .indexOfFirst { it.toSet().size == marker } + marker
 
-        fun receive(character: Char): Boolean = with(captured) {
-            if (size == limit) remove()
-            add(character)
+    fun part1(input: String) = capture(4, input)
 
-            return distinct().size == limit
-        }
-    }
-
-    fun part1(input: String) = input.indexOfFirst(Marker(4)::receive) + 1
-
-    fun part2(input: String) = input.indexOfFirst(Marker(14)::receive) + 1
+    fun part2(input: String) = capture(14, input)
 
     val testInput = readInputLines("Day06_test")
 
