@@ -17,3 +17,5 @@ fun readInputText(name: String) = File("src", "$name.txt")
 fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray()))
     .toString(16)
     .padStart(32, '0')
+
+fun <T> checkEqual(expected: T, actual: T) = check(expected == actual) { "expected: <$expected>, got: <$actual>" }
